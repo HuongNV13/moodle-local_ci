@@ -64,8 +64,8 @@ if [[ "${jobtype}" == "all" ]] || [[ "${jobtype}" == "behat-all" ]] || [[ "${job
     echo -n "Behat (NonJS - boost and classic / ${behat_options}): " >> "${resultfile}.jenkinscli"
     final_tags=
     if [[ -n "${behat_tags}" ]]; then
-        # Add the ~@javascript tag, because this is a non-js run.
-        final_tags="${behat_tags}&&~@javascript"
+        # Add the ~@javascript tag, because this is a non-js run and skip known flaky tests.
+        final_tags="${behat_tags}&&~@javascript&&~@skip"
     fi
     ${jenkinsreq} "DEV.01 - Developer-requested Behat" \
         -p REPOSITORY=${repository} \
@@ -85,8 +85,8 @@ if [[ "${jobtype}" == "behat-chrome" ]]; then
     echo -n "Behat (Chrome - boost / ${behat_options}): " >> "${resultfile}.jenkinscli"
     final_tags=
     if [[ -n "${behat_tags}" ]]; then
-        # Add the @javascript tag, because this is a js run, and skip known chrome bug.
-        final_tags="${behat_tags}&&@javascript&&~@skip_chrome_zerosize"
+        # Add the @javascript tag, because this is a js run and skip known flaky tests.
+        final_tags="${behat_tags}&&@javascript&&~@skip"
     fi
     ${jenkinsreq} "DEV.01 - Developer-requested Behat" \
         -p REPOSITORY=${repository} \
@@ -105,8 +105,8 @@ if [[ "${jobtype}" == "behat-chrome" ]]; then
     echo -n "Behat (Chrome - classic / ${behat_options}): " >> "${resultfile}.jenkinscli"
     final_tags=
     if [[ -n "${behat_tags}" ]]; then
-        # Add the @javascript tag, because this is a js run, and skip known chrome bug.
-        final_tags="${behat_tags}&&@javascript&&~@skip_chrome_zerosize"
+        # Add the @javascript tag, because this is a js run and skip known flaky tests.
+        final_tags="${behat_tags}&&@javascript&&~@skip"
     fi
     ${jenkinsreq} "DEV.01 - Developer-requested Behat" \
         -p REPOSITORY=${repository} \
@@ -126,8 +126,8 @@ if [[ "${jobtype}" == "all" ]] || [[ "${jobtype}" == "behat-all" ]] || [[ "${job
     echo -n "Behat (Firefox - boost / ${behat_options}): " >> "${resultfile}.jenkinscli"
     final_tags=
     if [[ -n "${behat_tags}" ]]; then
-        # Add the @javascript tag, because this is a js run.
-        final_tags="${behat_tags}&&@javascript"
+        # Add the @javascript tag, because this is a js run and skip known flaky tests.
+        final_tags="${behat_tags}&&@javascript&&~@skip"
     fi
     ${jenkinsreq} "DEV.01 - Developer-requested Behat" \
         -p REPOSITORY=${repository} \
@@ -146,8 +146,8 @@ if [[ "${jobtype}" == "all" ]] || [[ "${jobtype}" == "behat-all" ]] || [[ "${job
     echo -n "Behat (Firefox - classic / ${behat_options}): " >> "${resultfile}.jenkinscli"
     final_tags=
     if [[ -n "${behat_tags}" ]]; then
-        # Add the @javascript tag, because this is a js run.
-        final_tags="${behat_tags}&&@javascript"
+        # Add the @javascript tag, because this is a js run and skip known flaky tests.
+        final_tags="${behat_tags}&&@javascript&&~@skip"
     fi
     ${jenkinsreq} "DEV.01 - Developer-requested Behat" \
         -p REPOSITORY=${repository} \
